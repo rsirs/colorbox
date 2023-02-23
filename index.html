@@ -1,26 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <title>Color Picker</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <title>Color Box</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <header>
-      <img src="logo.svg" alt="ColorBox logo" height="80px" />
+  <body class="auto">
+    <div class="container">
+      <header>
+        <h1>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <!-- SVG code for the Color Box logo -->
+          </svg>
+          Color Box
+        </h1>
+        <div class="theme-switch">
+          <button class="light-theme-button active">Light</button>
+          <button class="dark-theme-button">Dark</button>
+          <button class="auto-theme-button">Auto</button>
+        </div>
+      </header>
+      <div class="content">
+        <h2>Color Tools</h2>
+        <div class="color-wheel-container">
+          <div class="color-wheel-bg">
+            <svg class="color-wheel">
+              <!-- SVG code for the color wheel -->
+            </svg>
+          </div>
+          <div class="color-input-container">
+            <label for="color-input">Color:</label>
+            <input
+              type="text"
+              id="color-input"
+              class="color-input"
+              value="#000000"
+            />
+            <button class="color-input-button">OK</button>
+          </div>
+        </div>
+        <div class="color-palette-container">
+          <h3>Color Palette</h3>
+          <div class="color-palette">
+            <div class="color-swatch color-1"></div>
+            <div class="color-swatch color-2"></div>
+            <div class="color-swatch color-3"></div>
+            <div class="color-swatch color-4"></div>
+          </div>
+        </div>
+        <div class="color-info-container">
+          <h3>Color Information</h3>
+          <div class="color-info">
+            <div class="color-info-row">
+              <div class="color-info-label">Hex:</div>
+              <div class="color-info-value hex-value">#000000</div>
+            </div>
+            <div class="color-info-row">
+              <div class="color-info-label">RGB:</div>
+              <div class="color-info-value rgb-value">rgb(0, 0, 0)</div>
+            </div>
+            <div class="color-info-row">
+              <div class="color-info-label">HSL:</div>
+              <div class="color-info-value hsl-value">hsl(0, 0%, 0%)</div>
+            </div>
+            <div class="color-info-row">
+              <div class="color-info-label">CMYK:</div>
+              <div class="color-info-value cmyk-value">cmyk(0, 0, 0, 100)</div>
+            </div>
+            <div class="color-info-row">
+              <div class="color-info-label">Contrast:</div>
+              <div class="color-info-value contrast-value">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="color-tools-container">
+          <h3>Color Tools</h3>
+          <button class="random-color-button">Random Color</button>
+          <button class="complementary-colors-button">Complementary Colors</button>
+          <button class="analogous-colors-button">Analogous colors</button>
+          <button class="analogous-colors-button">Analogous Colors</button>
+          <button class="split-complementary-colors-button">Split Complementary Colors</button>
+          <button class="triadic-colors-button">Triadic Colors</button>
+          <button class="tetradic-colors-button">Tetradic Colors</button>
+        </div>
+      </div>
+    </div>
+    <script src="lib/color.js"></script>
+    <script scr="lib/color-wheel.js"
+    <script>
+      const colorWheel = new ColorWheelPicker(document.querySelector('.color-wheel'));
+      let color = new Color('#000000');
+      colorWheel.setColor(color.getHue());
+      const colorInput = document.querySelector('.color-input');
+      colorInput.value = color.getHex();
+      updateColors();
 
-      <label class="theme-switch">
-        <input type="radio" name="theme" value="dark">
-        <input type="radio" name="theme" value="auto" checked>
-        <input type="radio" name="theme" value="light">
-        <div class="switch-bg"></div>
-        <div class="switch-thumb"></div>
-      </label>
-    </header>
-    
-    <main>
-      <!-- color picker markup will go here -->
-    </main>
-    <script src="index.js"></script>
-  </body>
+      colorInput.addEventListener('change', (event) => {
+        const value = event.target.value;
+        if (value) {
+          color = new Color(value);
+          colorWheel.setColor(color.getHue());
+          updateColors();
+        }
+      });
+
+      const colorInputButton = document.querySelector('.color-input-button');
+      colorInputButton.addEventListener('click', () => {
+        const value = colorInput.value;
+        if (value) {
+          color = new Color(value);
+          colorWheel.setColor(color.getHue());
+          updateColors();
+        }
+      });
+
+      colorWheel.onColorChange = (hue) => {
+        color.setHue(hue);
+        colorInput.value = color.getHex();
+        updateColors();
+      };
+
+      const randomColorButton = document.querySelector('.random-color-button');
+      randomColorButton.addEventListener('click', () => {
+        color = Color.getRandomColor();
+        colorInput.value = color.getHex();
+        colorWheel.setColor(color.getHue());
+        updateColors();
+      });
+
+      const complementaryColorsButton = document.querySelector('.complementary-colors-button');
+      complementaryColorsButton.addEventListener('click', () => {
+        const [color1, color2] = color.getComplementaryColors();
+        setColorSwatches([color, color1, color2, color.getTriadicColor(120)]);
+      });
+
+      const analogousColorsButton = document.querySelector('.analogous-colors-button');
+      analogousColorsButton.addEventListener('click', () => {
+        const colors = color.getAnalogousColors(6, 30);
+        setColorSwatches([color, ...colors]);
+      });
+
+      const splitComplementaryColorsButton = document.querySelector('.split-complementary-colors-button');
+      splitComplementaryColorsButton.addEventListener('click', () => {
+        const colors = color.getSplitComplementaryColors();
+        setColorSwatches([color, ...colors]);
+      });
+
+      const triadicColorsButton = document.querySelector('.triadic-colors-button');
+      triadicColorsButton.addEventListener('click', () => {
+        const colors = color.getTriadicColors();
+        setColorSwatches([color, ...colors]);
+      });
+
+      const tetradicColorsButton = document.querySelector('.tetradic-colors-button');
+      tetradicColorsButton.addEventListener('click', () => {
+        const colors = color.getTetradicColors();
+        setColorSwatches([color, ...colors]);
+      });
+
+      function setColorSwatches(colors) {
+        const swatches = document.querySelectorAll('.color-swatch');
+        for (let i = 0; i < swatches.length; i++) {
+          swatches[i].style.backgroundColor = colors[i].getHex();
+        }
+        updateColors();
+      }
+
+      function updateColors() {
+        const hexValue = document.querySelector('.hex-value');
+        const rgbValue = document.querySelector('.rgb-value');
+        const hslValue = document.querySelector('.hsl-value');
+        const cymkValue = document.querySelector('.cymk-value');
+        hexValue.innerText = color.getHex();
+        rgbValue.innerText = color.getRGB();
+        hslValue.innerText = color.getHSL();
+        cmykValue.innerText = color.getCMYK();
+        colorSwatch.style.backgroundColor = color.getHex();
+
+        const textColor = color.getContrastingColor();
+        const swatches = document.querySelectorAll('.color-swatch');
+        for (let i = 0; i < swatches.length; i++) {
+          const contrastColor = colors[i].getContrastingColor();
+          swatches[i].style.backgroundColor = colors[i].getHex();
+          swatches[i].style.color = contrastColor.getHex();
+        }
+        const complementaryColors = color.getComplementaryColors();
+        complementaryColorSwatch1.style.backgroundColor = complementaryColors[0].getHex();
+        complementaryColorSwatch2.style.backgroundColor = complementaryColors[1].getHex();
+        complementaryColorSwatch1.style.color = complementaryColors[0].getContrastingColor().getHex();
+        complementaryColorSwatch2.style.color = complementaryColors[1].getContrastingColor().getHex();
+
+        const analogousColors = color.getAnalogousColors(6, 30);
+        analogousColorSwatch1.style.backgroundColor = analogousColors[0].getHex();
+        analogousColorSwatch2.style.backgroundColor = analogousColors[1].getHex();
+        analogousColorSwatch3.style.backgroundColor = analogousColors[2].getHex();
+        analogousColorSwatch4.style.backgroundColor = analogousColors[3].getHex();
+        analogousColorSwatch5.style.backgroundColor = analogousColors[4].getHex();
+        analogousColorSwatch1.style.color = analogousColors[0].getContrastingColor().getHex();
+        analogousColorSwatch2.style.color = analogousColors[1].getContrastingColor().getHex();
+        analogousColorSwatch3.style.color = analogousColors[2].getContrastingColor().getHex();
+        analogousColorSwatch4.style.color = analogousColors[3].getContrastingColor().getHex();
+        analogousColorSwatch5.style.color = analogousColors[4].getContrastingColor().getHex();
+
+        const splitComplementaryColors = color.getSplitComplementaryColors();
+        splitComplementaryColorSwatch1.style.backgroundColor = splitComplementaryColors[0].getHex();
+        splitComplementaryColorSwatch2.style.backgroundColor = splitComplementaryColors[1].getHex();
+        splitComplementaryColorSwatch1.style.color = splitComplementaryColors[0].getContrastingColor().getHex();
+        splitComplementaryColorSwatch2.style.color = splitComplementaryColors[1].getContrastingColor().getHex();
+
+        const triadicColors = color.getTriadicColors();
+        triadicColorSwatch1.style.backgroundColor = triadicColors[0].getHex();
+        triadicColorSwatch2.style.backgroundColor = triadicColors[1].getHex();
+        triadicColorSwatch3.style.backgroundColor = triadicColors[2].getHex();
+        triadicColorSwatch1.style.color = triadicColors[0].getContrastingColor().getHex();
+        triadicColorSwatch2.style.color = triadicColors[1].getContrastingColor().getHex();
+        triadicColorSwatch3.style.color = triadicColors[2].getContrastingColor().getHex();
+
+        const tetradicColors = color.getTetradicColors();
+        tetradicColorSwatch1.style.backgroundColor = tetradicColors[0].getHex();
+        tetradicColorSwatch2.style.backgroundColor = tetradicColors[1].getHex();
+        tetradicColorSwatch3.style.backgroundColor = tetradicColors[2].getHex();
+        tetradicColorSwatch4.style.backgroundColor = tetradicColors[3].getHex();
+        tetradicColorSwatch1.style.color = tetradicColors[0].getContrastingColor().getHex();
+        tetradicColorSwatch2.style.color = tetradicColors[1].getContrastingColor().getHex();
+        tetradicColorSwatch3.style.color = tetradicColors[2].getContrastingColor().getHex();
+        tetradicColorSwatch4.style.color = tetradicColors[3].getContrastingColor().getHex();
+      }
+
+      colorPicker.addEventListener('input', (event) => {
+        const hexValue = event.target.value;
+        const color = new Color(hexValue);
+        updateColors(color);
+      });
+
+      colorWheel.onColorChange((color) => {
+        updateColors(color);
+      });
+
+      const colorButtons = document.querySelectorAll('.color-button');
+      for (let i = 0; i < colorButtons.length; i++) {
+        const color = colors[i];
+        colorButtons[i].style.backgroundColor = color.getHex();
+        colorButtons[i].addEventListener('click', () => {
+          updateColors(color);
+        });
+      }
+
+
+      // const complementaryColorsButton = document.getElementById('complementary-colors-button');
+      // complementaryColorsButton.addEventListener('click', () => {
+      //   const color = new Color(hexValue.innerText);
+      //   const complementaryColors = color.getComplementaryColors();
+      //   updateColors(complementaryColors[0]);
+      // });
+
+      // const analogousColorsButton = document.getElementById('analogous-colors-button');
+      // analogousColorsButton.addEventListener('click', () => {
+      //   const color = new Color(hexValue.innerText);
+      //   const analogousColors = color.getAnalogousColors(6, 30);
+      //   updateColors(analogousColors[0]);
+      // });
+
+      // const splitComplementaryColorsButton = document.getElementById('split-complementary-colors-button');
+      // splitComplementaryColorsButton.addEventListener('click', () => {
+      //   const color = new Color(hexValue.innerText);
+      //   const splitComplementaryColors = color.getSplitComplementaryColors();
+      //   updateColors(splitComplementaryColors[0]);
+      // });
+
+      // const triadicColorsButton = document.getElementById('triadic-colors-button');
+      // triadicColorsButton.addEventListener('click', () => {
+      //   const color = new Color(hexValue.innerText);
+      //   const triadicColors = color.getTriadicColors();
+      //   updateColors(triadicColors[0]);
+      // });
+
+      // const tetradicColorsButton = document.getElementById('tetradic-colors-button');
+      // tetradicColorsButton.addEventListener('click', () => {
+      //   const color = new Color(hexValue.innerText);
+      //   const tetradicColors = color.getTetradicColors();
+      //   updateColors(tetradicColors[0]);
+      // });
+</script>
+</body>
 </html>
+
+
