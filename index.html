@@ -1,35 +1,152 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Color Class Example</title>
     <style>
-      .color-swatch {
-        display: inline-block;
-        width: 80px;
-        height: 80px;
-        margin: 10px;
-        border: 1px solid #ccc;
-      }
-      .color-picker {
-        margin-bottom: 20px;
-      }
-      #color-wheel-container {
-        display: inline-block;
-        vertical-align: top;
-        margin-left: 20px;
-      }
+        .color-swatch {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .color-swatch:hover {
+            border: 1px solid #999;
+        }
+
+        .color-swatch:active {
+            border: 1px solid #333;
+        }
+
+        .color-picker {
+            margin-bottom: 20px;
+        }
+
+        .color-picker label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .color-picker input {
+            vertical-align: middle;
+        }
+
+        #color-wheel-container {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 20px;
+        }
+
+        #color-wheel {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        #color-wheel .color-preview {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        #color-wheel .color-preview:hover {
+            border: 1px solid #999;
+        }
+
+        #color-wheel .color-preview:active {
+            border: 1px solid #333;
+        }
+
+        .color-property {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .color-property-value {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .color-property-label {
+            font-weight: bold;
+        }
+
+        .color-property-label:after {
+            content: ":";
+        }
+
+        .color-palette {
+            margin-bottom: 20px;
+        }
+
+        .color-palette label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .color-palette input {
+            vertical-align: middle;
+        }
+
+        .color-palette .color-swatch {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .color-palette {
+            margin-bottom: 20px;
+        }
+
+        .color-palette label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .color-palette input {
+            vertical-align: middle;
+        }
+
+        .color-palette .color-swatch {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Color Class Example</h1>
     <div class="color-picker">
-      <label for="color-picker-input">Original color:</label>
-      <input id="color-picker-input" type="color" value="#3498db">
+        <label for="color-picker-input">Original color:</label>
+        <input id="color-picker-input" type="color" value="#3498db">
     </div>
+    <!-- ... existing markup ... -->
+    <div class="color-palette">
+        <label for="color-palette">Color Palette:</label>
+        <input type="color" id="color-palette1" value="#FF0000">
+        <input type="color" id="color-palette2" value="#00FF00">
+        <input type="color" id="color-palette3" value="#0000FF">
+        <input type="color" id="color-palette4" value="#FFFF00">
+        <input type="color" id="color-palette5" value="#00FFFF">
+        <input type="color" id="color-palette6" value="#FF00FF">
+    </div>
+    <!-- ... existing markup ... -->
+
     <div id="color-wheel-container">
-      <h2>Color Wheel</h2>
-      <div id="color-wheel"></div>
+        <h2>Color Wheel</h2>
+        <div id="color-wheel"></div>
     </div>
     <p>Contrasting color: <span id="contrasting-color"></span></p>
     <p>Grayscale equivalent: <span id="grayscale-color"></span></p>
@@ -50,45 +167,66 @@
     <script src="color.js"></script>
     <script src="color-wheel.js"></script>
     <script>
-      const colorInput = document.getElementById('color-picker-input');
-      const colorWheel = new ColorWheel(document.getElementById('color-wheel'));
-      let currentColor = new Color(colorInput.value);
-      colorInput.addEventListener('input', () => {
-        currentColor = new Color(colorInput.value);
-        updateColors();
-      });
-      colorWheel.onSelect(color => {
-        currentColor = new Color(color.toHexString());
-        colorInput.value = currentColor.toHexString();
-        updateColors();
-      });
+        const colorInput = document.getElementById('color-picker-input');
+        const colorWheel = new ColorWheel(document.getElementById('color-wheel'));
+        let currentColor = new Color(colorInput.value);
+        colorInput.addEventListener('input', () => {
+            currentColor = new Color(colorInput.value);
+            updateColors();
+        });
+        colorWheel.onSelect(color => {
+            currentColor = new Color(color.toHexString());
+            colorInput.value = currentColor.toHexString();
+            updateColors();
+        });
 
-      function updateColors() {
-        colorWheel.setColor(currentColor);
-        document.getElementById('contrasting-color').innerText = currentColor.getContrastingColor().toHexString();
-        document.getElementById('grayscale-color').innerText = currentColor.getGrayscaleColor().toHexString();
-        document.getElementById('lighter-color').innerText = currentColor.getLighterColor().toHexString();
-        document.getElementById('darker-color').innerText = currentColor.getDarkerColor().toHexString();
-        document.getElementById('saturated-color').innerText = currentColor.getSaturatedColor().toHexString();
-        document.getElementById('desaturated-color').innerText = currentColor.getDesaturatedColor().toHexString();
-        const analogousColors = currentColor.getAnalogousColors();
-        const analogousColorsHtml = analogousColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-        document.getElementById('analogous-colors').innerHTML = analogousColorsHtml;
-        const complementaryColors = currentColor.getComplementaryColors();
-        const complementaryColorsHtml = complementaryColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-        document.getElementById('complementary-colors').innerHTML = complementaryColorsHtml;
-        const triadicColors = currentColor.getTriadicColors();
-        const triadicColorsHtml = triadicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-        document.getElementById('triadic-colors').innerHTML = triadicColorsHtml;
-        const splitComplementaryColors = currentColor.getSplitComplementaryColors();
-        const splitComplementaryColorsHtml = splitComplementaryColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-        document.getElementById('split-complementary-colors').innerHTML = splitComplementaryColorsHtml;
-        const tetradicColors = currentColor.getTetradicColors();
-        const tetradicColorsHtml = tetradicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-        document.getElementById('tetradic-colors').innerHTML = tetradicColorsHtml;
-      }
+        function updateColors() {
+            colorWheel.setColor(currentColor);
+            document.getElementById('contrasting-color').innerText = currentColor.getContrastingColor().toHexString();
+            document.getElementById('grayscale-color').innerText = currentColor.getGrayscaleColor().toHexString();
+            document.getElementById('lighter-color').innerText = currentColor.getLighterColor().toHexString();
+            document.getElementById('darker-color').innerText = currentColor.getDarkerColor().toHexString();
+            document.getElementById('saturated-color').innerText = currentColor.getSaturatedColor().toHexString();
+            document.getElementById('desaturated-color').innerText = currentColor.getDesaturatedColor().toHexString();
+            const analogousColors = currentColor.getAnalogousColors();
+            const analogousColorsHtml = analogousColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+            document.getElementById('analogous-colors').innerHTML = analogousColorsHtml;
+            const complementaryColors = currentColor.getComplementaryColors();
+            const complementaryColorsHtml = complementaryColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+            document.getElementById('complementary-colors').innerHTML = complementaryColorsHtml;
+            const triadicColors = currentColor.getTriadicColors();
+            const triadicColorsHtml = triadicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+            document.getElementById('triadic-colors').innerHTML = triadicColorsHtml;
+            const splitComplementaryColors = currentColor.getSplitComplementaryColors();
+            const splitComplementaryColorsHtml = splitComplementaryColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+            document.getElementById('split-complementary-colors').innerHTML = splitComplementaryColorsHtml;
+            const tetradicColors = currentColor.getTetradicColors();
+            const tetradicColorsHtml = tetradicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+            document.getElementById('tetradic-colors').innerHTML = tetradicColorsHtml;
 
-      updateColors();
+            const colorPalette1 = new Color(document.getElementById('color-palette1').value);
+            const colorPalette2 = new Color(document.getElementById('color-palette2').value);
+            const colorPalette3 = new Color(document.getElementById('color-palette3').value);
+            const colorPalette4 = new Color(document.getElementById('color-palette4').value);
+            const colorPalette5 = new Color(document.getElementById('color-palette5').value);
+            const colorPalette6 = new Color(document.getElementById('color-palette6').value);
+
+            const colorPaletteSwatches = [
+                colorPalette1, colorPalette2, colorPalette3,
+                colorPalette4, colorPalette5, colorPalette6
+            ];
+
+            const colorPaletteSwatchesHtml = colorPaletteSwatches
+                .map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`)
+                .join('');
+
+            document.getElementById('color-palette-swatches').innerHTML = colorPaletteSwatchesHtml;
+
+
+        }
+
+        updateColors();
     </script>
-  </body>
+</body>
+
 </html>
