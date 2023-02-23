@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
     <title>Color Class Example</title>
     <style>
-        .color-swatch {
-            display: inline-block;
-            width: 80px;
-            height: 80px;
-            margin: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .color-picker {
-            margin-bottom: 20px;
-        }
+      .color-swatch {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        margin: 10px;
+        border: 1px solid #ccc;
+      }
+      .color-picker {
+        margin-bottom: 20px;
+      }
+      #color-wheel-container {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 20px;
+      }
     </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <h1>Color Class Example</h1>
     <div class="color-picker">
-        <label for="color-picker-input">Original color:</label>
-        <input id="color-picker-input" type="color" value="#3498db">
+      <label for="color-picker-input">Original color:</label>
+      <input id="color-picker-input" type="color" value="#3498db">
     </div>
-    <div id="color-wheel"></div>
+    <div id="color-wheel-container">
+      <h2>Color Wheel</h2>
+      <div id="color-wheel"></div>
+    </div>
     <p>Contrasting color: <span id="contrasting-color"></span></p>
     <p>Grayscale equivalent: <span id="grayscale-color"></span></p>
     <p>Lighter color: <span id="lighter-color"></span></p>
@@ -42,49 +47,48 @@
     <div id="split-complementary-colors"></div>
     <p>Tetradic colors:</p>
     <div id="tetradic-colors"></div>
-    <script src="index.js"></script>
+    <script src="color.js"></script>
+    <script src="color-wheel.js"></script>
     <script>
-        const colorInput = document.getElementById('color-picker-input');
-        const colorWheel = new ColorWheel(document.getElementById('color-wheel'));
-        let currentColor = new Color(colorInput.value);
-        colorInput.addEventListener('input', () => {
-            currentColor = new Color(colorInput.value);
-            updateColors();
-        });
-        colorWheel.onSelect(color => {
-            currentColor = new Color(color.toHexString());
-            colorInput.value = currentColor.toHexString();
-            updateColors();
-        });
-
-        function updateColors() {
-            colorWheel.setColor(currentColor);
-            document.getElementById('contrasting-color').innerText = currentColor.getContrastingColor().toHexString();
-            document.getElementById('grayscale-color').innerText = currentColor.getGrayscaleColor().toHexString();
-            document.getElementById('lighter-color').innerText = currentColor.getLighterColor().toHexString();
-            document.getElementById('darker-color').innerText = currentColor.getDarkerColor().toHexString();
-            document.getElementById('saturated-color').innerText = currentColor.getSaturatedColor().toHexString();
-            document.getElementById('desaturated-color').innerText = currentColor.getDesaturatedColor().toHexString();
-            const analogousColors = currentColor.getAnalogousColors();
-            const analogousColorsHtml = analogousColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-            document.getElementById('analogous-colors').innerHTML = analogousColorsHtml;
-            const complementaryColors = currentColor.getComplementaryColors();
-            const complementaryColorsHtml = complementaryColors.map(color => `<div
-        .color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-            document.getElementById('complementary-colors').innerHTML = complementaryColorsHtml;
-            const triadicColors = currentColor.getTriadicColors();
-            const triadicColorsHtml = triadicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-            document.getElementById('triadic-colors').innerHTML = triadicColorsHtml;
-            const splitComplementaryColors = currentColor.getSplitComplementaryColors();
-            const splitComplementaryColorsHtml = splitComplementaryColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-            document.getElementById('split-complementary-colors').innerHTML = splitComplementaryColorsHtml;
-            const tetradicColors = currentColor.getTetradicColors();
-            const tetradicColorsHtml = tetradicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
-            document.getElementById('tetradic-colors').innerHTML = tetradicColorsHtml;
-        }
-
+      const colorInput = document.getElementById('color-picker-input');
+      const colorWheel = new ColorWheel(document.getElementById('color-wheel'));
+      let currentColor = new Color(colorInput.value);
+      colorInput.addEventListener('input', () => {
+        currentColor = new Color(colorInput.value);
         updateColors();
-    </script>
-</body>
+      });
+      colorWheel.onSelect(color => {
+        currentColor = new Color(color.toHexString());
+        colorInput.value = currentColor.toHexString();
+        updateColors();
+      });
 
+      function updateColors() {
+        colorWheel.setColor(currentColor);
+        document.getElementById('contrasting-color').innerText = currentColor.getContrastingColor().toHexString();
+        document.getElementById('grayscale-color').innerText = currentColor.getGrayscaleColor().toHexString();
+        document.getElementById('lighter-color').innerText = currentColor.getLighterColor().toHexString();
+        document.getElementById('darker-color').innerText = currentColor.getDarkerColor().toHexString();
+        document.getElementById('saturated-color').innerText = currentColor.getSaturatedColor().toHexString();
+        document.getElementById('desaturated-color').innerText = currentColor.getDesaturatedColor
+        const analogousColors = currentColor.getAnalogousColors();
+        const analogousColorsHtml = analogousColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+        document.getElementById('analogous-colors').innerHTML = analogousColorsHtml;
+        const complementaryColors = currentColor.getComplementaryColors();
+        const complementaryColorsHtml = complementaryColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+        document.getElementById('complementary-colors').innerHTML = complementaryColorsHtml;
+        const triadicColors = currentColor.getTriadicColors();
+        const triadicColorsHtml = triadicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+        document.getElementById('triadic-colors').innerHTML = triadicColorsHtml;
+        const splitComplementaryColors = currentColor.getSplitComplementaryColors();
+        const splitComplementaryColorsHtml = splitComplementaryColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+        document.getElementById('split-complementary-colors').innerHTML = splitComplementaryColorsHtml;
+        const tetradicColors = currentColor.getTetradicColors();
+        const tetradicColorsHtml = tetradicColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
+        document.getElementById('tetradic-colors').innerHTML = tetradicColorsHtml;
+      }
+
+      updateColors();
+    </script>
+  </body>
 </html>
