@@ -70,7 +70,7 @@
         document.getElementById('lighter-color').innerText = currentColor.getLighterColor().toHexString();
         document.getElementById('darker-color').innerText = currentColor.getDarkerColor().toHexString();
         document.getElementById('saturated-color').innerText = currentColor.getSaturatedColor().toHexString();
-        document.getElementById('desaturated-color').innerText = currentColor.getDesaturatedColor
+        document.getElementById('desaturated-color').innerText = currentColor.getDesaturatedColor().toHexString();
         const analogousColors = currentColor.getAnalogousColors();
         const analogousColorsHtml = analogousColors.map(color => `<div class="color-swatch" style="background-color: ${color.toHexString()}"></div>`).join('');
         document.getElementById('analogous-colors').innerHTML = analogousColorsHtml;
