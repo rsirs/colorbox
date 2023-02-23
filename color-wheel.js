@@ -1,4 +1,4 @@
-export class ColorWheel {
+export class ColorWheelPicker {
     constructor(container, width = 300, height = 300) {
         this.width = width;
         this.height = height;
