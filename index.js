@@ -69,6 +69,7 @@ function addThemeListner() {
     function applyTheme(theme) {
         Object.keys(theme).forEach((key) => {
             document.documentElement.style.setProperty(key, theme[key]);
+            document.getRootNode.style.setProperty(key, theme[key]);
         });
     }
 
