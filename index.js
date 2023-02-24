@@ -50,7 +50,7 @@ function addThemeListner() {
     };
 
     const toggleSwitch = document.querySelectorAll(".theme-switch input[type='radio']");
-    const currentTheme = localStorage.getItem("theme");
+    const currentTheme = localStorage.getItem("theme") || 'dark';
 
     if (currentTheme) {
         document.documentElement.setAttribute("data-theme", currentTheme);
