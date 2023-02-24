@@ -1,6 +1,6 @@
 function addThemeListner() {
 
-    const baseColor = new Color(document.getElementById("color-input").value || '0091ea');
+    const baseColor = new Color(document.querySelector('.color-input')?.value || '#0091ea');
 
     // Calculate the relative luminance of the base color
     const luminance = 0.2126 * baseColor.r + 0.7152 * baseColor.g + 0.0722 * baseColor.b;
