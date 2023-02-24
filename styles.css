@@ -1,3 +1,30 @@
+:root {
+  /* Light mode variables */
+  --background-color: #fff;
+  --text-color: #333;
+  --input-background-color: #f7f7f7;
+  --input-border-color: #ddd;
+  --input-box-shadow-color: rgba(0, 0, 0, 0.1);
+  --color-wheel-border-color: #ddd;
+  --color-picker-selector-color: #fff;
+  --color-picker-selector-box-shadow-color: rgba(0, 0, 0, 0.2);
+
+  /* Dark mode variables */
+  --background-color-dark: #333;
+  --text-color-dark: #fff;
+  --input-background-color-dark: #555;
+  --input-border-color-dark: #444;
+  --input-box-shadow-color-dark: rgba(255, 255, 255, 0.1);
+  --color-wheel-border-color-dark: #444;
+  --color-picker-selector-color-dark: #333;
+  --color-picker-selector-box-shadow-color-dark: rgba(255, 255, 255, 0.2);
+
+  /* Auto mode variables */
+  --background-color-auto: #fff;
+  --text-color-auto: #333;
+}
+
+
 header {
   display: flex;
   justify-content: space-between;
