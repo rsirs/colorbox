@@ -1,3 +1,5 @@
+import {Color} from './lib';
+
 function addThemeListner() {
 
     const baseColor = new Color(document.querySelector('.color-input')?.value || '#0091ea');
