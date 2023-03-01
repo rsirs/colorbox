@@ -23,10 +23,10 @@ function addThemeListner() {
         "--text-color": baseColor.invert().toHexString(),
         "--input-background-color": baseColor.lighten(20).toHexString(),
         "--input-border-color": baseColor.darken(20).toHexString(),
-        "--input-box-shadow-color": baseColor.alpha(0.1).toRgbaString(),
+        "--input-box-shadow-color": baseColor.darken(20).toHexString(),
         "--color-wheel-border-color": baseColor.lighten(30).toHexString(),
         "--color-picker-selector-color": "#fff",
-        "--color-picker-selector-box-shadow-color": baseColor.alpha(0.2).toRgbaString(),
+        "--color-picker-selector-box-shadow-color": baseColor.darken(20).toHexString(),
     };
 
     const darkTheme = {
@@ -34,10 +34,10 @@ function addThemeListner() {
         "--text-color": baseColor.invert().toHexString(),
         "--input-background-color": baseColor.darken(20).toHexString(),
         "--input-border-color": baseColor.lighten(20).toHexString(),
-        "--input-box-shadow-color": baseColor.alpha(0.1).toRgbaString(),
+        "--input-box-shadow-color": baseColor.lighten(20).toHexString(),
         "--color-wheel-border-color": baseColor.darken(30).toHexString(),
         "--color-picker-selector-color": "#333",
-        "--color-picker-selector-box-shadow-color": baseColor.alpha(0.2).toRgbaString(),
+        "--color-picker-selector-box-shadow-color": baseColor.lighten(20).toHexString(),
     };
 
     const autoTheme = {
@@ -45,10 +45,10 @@ function addThemeListner() {
         "--text-color": baseColor.invert().toHexString(),
         "--input-background-color": baseColor.lighten(5).toHexString(),
         "--input-border-color": baseColor.darken(10).toHexString(),
-        "--input-box-shadow-color": baseColor.alpha(0.1).toRgbaString(),
+        "--input-box-shadow-color": baseColor.darken(10).toHexString(),
         "--color-wheel-border-color": baseColor.lighten(20).toHexString(),
         "--color-picker-selector-color": baseColor.invert().toHexString(),
-        "--color-picker-selector-box-shadow-color": baseColor.alpha(0.2).toRgbaString(),
+        "--color-picker-selector-box-shadow-color": baseColor.darken(10).toHexString(),
     };
 
     const toggleSwitch = document.querySelectorAll(".theme-switch input[type='radio']");
