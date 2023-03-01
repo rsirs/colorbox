@@ -54,7 +54,7 @@ header {
 }
 
 .theme-switch input[type="radio"]:checked + span::before {
-  background-color: var(--color-picker-selector-color);
+  background-color: var(--input-background-color);
 }
 
 .theme-switch input[type="radio"] + span {

@@ -9,8 +9,10 @@ function addThemeListner(event=undefined) {
     const luminance = baseColor.getRelativeLuminance();
 
     // Define the light and dark colors based on the relative luminance
-    const lightColor = new Color().setLuminance(luminance + 0.5);
-    const darkColor = new Color().setLuminance(luminance - 0.3);
+    const lightColor = new Color(baseColor.rgb).getLightColor(luminance + 0.5);
+    const lightContrastColor = lightColor.getBestContrastColor();
+    const darkColor = new Color(baseColor.rgb).getDarkColor(luminance - 0.3);
+    const darkContrastColor = darkColor.getBestContrastColor();
 
     console.log(baseColor.toString(), lightColor.toString(), darkColor.toString())
 
@@ -27,7 +29,7 @@ function addThemeListner(event=undefined) {
         "--input-border-color": baseColor.darken(20).toHexString(),
         "--input-box-shadow-color": baseColor.darken(20).toHexString(),
         "--color-wheel-border-color": baseColor.darken(30).toHexString(),
-        "--color-picker-selector-color": darkColor.toHexString(),
+        "--color-picker-selector-color": lightContrastColor.toHexString(),
         "--color-picker-selector-box-shadow-color": baseColor.darken(20).toHexString(),
     };
 
@@ -38,7 +40,7 @@ function addThemeListner(event=undefined) {
         "--input-border-color": baseColor.lighten(20).toHexString(),
         "--input-box-shadow-color": baseColor.lighten(20).toHexString(),
         "--color-wheel-border-color": baseColor.lighten(30).toHexString(),
-        "--color-picker-selector-color": lightColor.toHexString(),
+        "--color-picker-selector-color": darkContrastColor.toHexString(),
         "--color-picker-selector-box-shadow-color": baseColor.lighten(20).toHexString(),
     };
 
