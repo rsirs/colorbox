@@ -3,6 +3,7 @@ import {Color} from './lib/color.js';
 function addThemeListner(event=undefined) {
 
     const colorPicker = document.querySelector('.color-picker');
+    console.log(colorPicker?.value);
     const baseColor = new Color(colorPicker?.value || '#e66465');
 
     // Calculate the relative luminance of the base color
@@ -13,6 +14,8 @@ function addThemeListner(event=undefined) {
     const lightContrastColor = lightColor.getBestContrastColor();
     const darkColor = new Color(baseColor.rgb).setLuminance(Math.min(luminance - 0.3,0));
     const darkContrastColor = darkColor.getBestContrastColor();
+
+    console.log(lightColor.hex, darkColor.hex, lightContrastColor.hex, darkContrastColor.hex)
 
     console.log(baseColor.toString(), lightColor.toString(), darkColor.toString())
 
