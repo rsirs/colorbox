@@ -1,8 +1,9 @@
 import {Color} from './lib/color.js';
 
-function addThemeListner() {
+function addThemeListner(event=undefined) {
 
-    const baseColor = new Color(document.querySelector('.color-input')?.value || '#0091ea');
+    const colorPicker = document.querySelector('.color-input');
+    const baseColor = new Color(colorPicker.value || '#0091ea');
 
     // Calculate the relative luminance of the base color
     const luminance = baseColor.getRelativeLuminance();
@@ -107,4 +108,5 @@ function addThemeListner() {
 
 (function setup() {
     addThemeListner();
+    document.querySelector('.color-input').addEventListener('input', addThemeListner)
 })()
