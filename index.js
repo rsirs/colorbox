@@ -2,7 +2,7 @@ import {Color} from './lib/color.js';
 
 function addThemeListner(event=undefined) {
 
-    const colorPicker = document.querySelector('.color-input');
+    const colorPicker = document.querySelector('.color-picker');
     const baseColor = new Color(colorPicker?.value || '#e66465');
 
     // Calculate the relative luminance of the base color
@@ -23,22 +23,22 @@ function addThemeListner(event=undefined) {
     const lightTheme = {
         "--background-color": lightColor.toHexString(),
         "--text-color": baseColor.invert().toHexString(),
-        "--input-background-color": baseColor.lighten(20).toHexString(),
+        "--input-background-color": baseColor.darken(20).toHexString(),
         "--input-border-color": baseColor.darken(20).toHexString(),
         "--input-box-shadow-color": baseColor.darken(20).toHexString(),
-        "--color-wheel-border-color": baseColor.lighten(30).toHexString(),
-        "--color-picker-selector-color": lightColor.toHexString(),
+        "--color-wheel-border-color": baseColor.darken(30).toHexString(),
+        "--color-picker-selector-color": darkColor.toHexString(),
         "--color-picker-selector-box-shadow-color": baseColor.darken(20).toHexString(),
     };
 
     const darkTheme = {
         "--background-color": darkColor.toHexString(),
         "--text-color": baseColor.invert().toHexString(),
-        "--input-background-color": baseColor.darken(20).toHexString(),
+        "--input-background-color": baseColor.lighten(20).toHexString(),
         "--input-border-color": baseColor.lighten(20).toHexString(),
         "--input-box-shadow-color": baseColor.lighten(20).toHexString(),
-        "--color-wheel-border-color": baseColor.darken(30).toHexString(),
-        "--color-picker-selector-color": darkColor.toHexString(),
+        "--color-wheel-border-color": baseColor.lighten(30).toHexString(),
+        "--color-picker-selector-color": lightColor.toHexString(),
         "--color-picker-selector-box-shadow-color": baseColor.lighten(20).toHexString(),
     };
 
@@ -109,6 +109,6 @@ function addThemeListner(event=undefined) {
 (function setup() {
     window.onload = () => {
         addThemeListner();
-        document.querySelector('.color-input')?.addEventListener('input', addThemeListner)
+        document.querySelector('.color-picker')?.addEventListener('input', addThemeListner)
     }
 })()
