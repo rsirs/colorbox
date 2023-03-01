@@ -27,7 +27,7 @@ function addThemeListner(event=undefined) {
         "--input-border-color": baseColor.darken(20).toHexString(),
         "--input-box-shadow-color": baseColor.darken(20).toHexString(),
         "--color-wheel-border-color": baseColor.lighten(30).toHexString(),
-        "--color-picker-selector-color": "#fff",
+        "--color-picker-selector-color": lightColor.toHexString(),
         "--color-picker-selector-box-shadow-color": baseColor.darken(20).toHexString(),
     };
 
@@ -38,7 +38,7 @@ function addThemeListner(event=undefined) {
         "--input-border-color": baseColor.lighten(20).toHexString(),
         "--input-box-shadow-color": baseColor.lighten(20).toHexString(),
         "--color-wheel-border-color": baseColor.darken(30).toHexString(),
-        "--color-picker-selector-color": "#333",
+        "--color-picker-selector-color": darkColor.toHexString(),
         "--color-picker-selector-box-shadow-color": baseColor.lighten(20).toHexString(),
     };
 
