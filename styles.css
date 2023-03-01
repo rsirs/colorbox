@@ -1,6 +1,8 @@
 body {
   color: var(--text-color);
   background-color: var(--background-color);
+  font-style: normal;
+  font-size: 1em;
 }
 
 header {
@@ -79,5 +81,5 @@ header {
 }
 
 .main{
-  margin-top: 60px;
+  margin-top: 80px;
 }
