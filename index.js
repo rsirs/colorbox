@@ -3,7 +3,7 @@ import {Color} from './lib/color.js';
 function addThemeListner(event=undefined) {
 
     const colorPicker = document.querySelector('.color-input');
-    const baseColor = new Color(colorPicker?.value || '#0091ea');
+    const baseColor = new Color(colorPicker?.value || '#e66465');
 
     // Calculate the relative luminance of the base color
     const luminance = baseColor.getRelativeLuminance();
