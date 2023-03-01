@@ -1,4 +1,4 @@
-import {Color} from './lib';
+import {Color} from '/modules/color.js';
 
 function addThemeListner() {
 
