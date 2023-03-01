@@ -107,8 +107,8 @@ function addThemeListner(event=undefined) {
 }
 
 (function setup() {
-    window.onload(() => {
+    window.onload = () => {
         addThemeListner();
         document.querySelector('.color-input')?.addEventListener('input', addThemeListner)
-    })
+    }
 })()
