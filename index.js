@@ -11,6 +11,7 @@ function addThemeListner() {
     const lightColor = new Color().setLuminance(luminance + 0.5);
     const darkColor = new Color().setLuminance(luminance - 0.3);
 
+    console.log(baseColor.toString(), lightColor.toString, darkColor.toString())
 
     const getAutoColor = (color) => {
         const luminance = color.getLuminance();
