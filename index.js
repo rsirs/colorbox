@@ -20,7 +20,7 @@ function addThemeListner() {
 
     const lightTheme = {
         "--background-color": lightColor.toHexString(),
-        "--text-color": baseColor.getInverted().toHexString(),
+        "--text-color": baseColor.invert().toHexString(),
         "--input-background-color": baseColor.lighten(20).toHexString(),
         "--input-border-color": baseColor.darken(20).toHexString(),
         "--input-box-shadow-color": baseColor.alpha(0.1).toRgbaString(),
@@ -31,7 +31,7 @@ function addThemeListner() {
 
     const darkTheme = {
         "--background-color": darkColor.toHexString(),
-        "--text-color": baseColor.getInverted().toHexString(),
+        "--text-color": baseColor.invert().toHexString(),
         "--input-background-color": baseColor.darken(20).toHexString(),
         "--input-border-color": baseColor.lighten(20).toHexString(),
         "--input-box-shadow-color": baseColor.alpha(0.1).toRgbaString(),
@@ -42,12 +42,12 @@ function addThemeListner() {
 
     const autoTheme = {
         "--background-color": getAutoColor(baseColor).toHexString(),
-        "--text-color": baseColor.getInverted().toHexString(),
+        "--text-color": baseColor.invert().toHexString(),
         "--input-background-color": baseColor.lighten(5).toHexString(),
         "--input-border-color": baseColor.darken(10).toHexString(),
         "--input-box-shadow-color": baseColor.alpha(0.1).toRgbaString(),
         "--color-wheel-border-color": baseColor.lighten(20).toHexString(),
-        "--color-picker-selector-color": baseColor.getInverted().toHexString(),
+        "--color-picker-selector-color": baseColor.invert().toHexString(),
         "--color-picker-selector-box-shadow-color": baseColor.alpha(0.2).toRgbaString(),
     };
 
