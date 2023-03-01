@@ -25,23 +25,23 @@ function addThemeListner(event=undefined) {
     const lightTheme = {
         "--background-color": lightColor.toHexString(),
         "--text-color": baseColor.invert().toHexString(),
-        "--input-background-color": baseColor.darken(20).toHexString(),
-        "--input-border-color": baseColor.darken(20).toHexString(),
-        "--input-box-shadow-color": baseColor.darken(20).toHexString(),
-        "--color-wheel-border-color": baseColor.darken(30).toHexString(),
-        "--color-picker-selector-color": lightContrastColor.toHexString(),
-        "--color-picker-selector-box-shadow-color": baseColor.darken(20).toHexString(),
+        "--input-background-color": baseColor.lighten(5).toHexString(),
+        "--input-border-color": baseColor.darken(10).toHexString(),
+        "--input-box-shadow-color": baseColor.darken(10).toHexString(),
+        "--color-wheel-border-color": baseColor.lighten(20).toHexString(),
+        "--color-picker-selector-color": baseColor.invert().toHexString(),
+        "--color-picker-selector-box-shadow-color": baseColor.darken(10).toHexString(),
     };
 
     const darkTheme = {
         "--background-color": darkColor.toHexString(),
         "--text-color": baseColor.invert().toHexString(),
-        "--input-background-color": baseColor.lighten(20).toHexString(),
-        "--input-border-color": baseColor.lighten(20).toHexString(),
-        "--input-box-shadow-color": baseColor.lighten(20).toHexString(),
-        "--color-wheel-border-color": baseColor.lighten(30).toHexString(),
-        "--color-picker-selector-color": darkContrastColor.toHexString(),
-        "--color-picker-selector-box-shadow-color": baseColor.lighten(20).toHexString(),
+        "--input-background-color": baseColor.lighten(5).toHexString(),
+        "--input-border-color": baseColor.darken(10).toHexString(),
+        "--input-box-shadow-color": baseColor.darken(10).toHexString(),
+        "--color-wheel-border-color": baseColor.lighten(20).toHexString(),
+        "--color-picker-selector-color": baseColor.invert().toHexString(),
+        "--color-picker-selector-box-shadow-color": baseColor.darken(10).toHexString(),
     };
 
     const autoTheme = {
