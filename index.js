@@ -59,7 +59,7 @@ function addThemeListner(event=undefined) {
         "--color-picker-selector-box-shadow-color": baseColor.darken(10).toHexString(),
     };
 
-    const toggleSwitch = document.querySelectorAll(".theme-switch input[type='radio']");
+    const toggleSwitch = document.querySelectorAll(".theme-button input[type='radio']");
     const currentTheme = localStorage.getItem("theme") || 'dark';
 
     if (currentTheme) {
